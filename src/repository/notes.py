@@ -3,7 +3,7 @@ from typing import List
 from sqlalchemy.orm import Session
 
 from src.database.models import Note, Tag
-from src.schemas import NoteModel, NoteUpdate, NoteStatusUpdate
+from src.schemas.notes import NoteModel, NoteUpdate, NoteStatusUpdate
 
 
 async def get_notes(skip: int, limit: int, db: Session) -> List[Note]:

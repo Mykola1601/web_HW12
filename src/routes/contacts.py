@@ -3,7 +3,7 @@ from fastapi import APIRouter, HTTPException, Depends, status
 from sqlalchemy.orm import Session
 from sqlalchemy import text
 from src.database.db import get_db
-from src.schemas import ContactModel, ContactResponse, ContactUpdate
+from src.schemas.contacts import ContactModel, ContactResponse, ContactUpdate
 from src.repository import contacts as repository_contacts
 
 router = APIRouter(prefix='/contacts', tags=["contacts"])

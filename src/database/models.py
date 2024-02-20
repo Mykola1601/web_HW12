@@ -38,8 +38,9 @@ class User(Base):
     password = Column(String(255), nullable=False)
     avatar = Column(String(255), nullable=True)
     refresh_token = Column(String(255), nullable=True)
+    created_at = Column('created_at', DateTime, default=func.now(), nullable=True)
+    updated_at = Column('updated_at', DateTime, default=func.now(), onupdate=func.now())
 
-# Base.metadata.create_all(bind=engine)
 
 class Note(Base):
     __tablename__ = "notes"
@@ -50,8 +51,8 @@ class Note(Base):
     tags = relationship("Tag", secondary=note_m2m_tag, backref="notes")
     user_id = Column(Integer, ForeignKey("users.id",  ondelete="CASCADE"))
     user = relationship("User", backref="notes", lazy="joined")
-    created_at = Column('created_at', DateTime, default=func.now())
-
+    created_at = Column('created_at', DateTime, default=func.now(), nullable=True)
+    updated_at = Column('updated_at', DateTime, default=func.now(), onupdate=func.now())
 
 
 class Tag(Base):

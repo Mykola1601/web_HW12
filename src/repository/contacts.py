@@ -2,7 +2,7 @@ from typing import List
 from datetime import datetime, timedelta
 # from sqlalchemy.orm import Session
 from src.database.models import Contact
-from src.schemas import ContactModel, ContactUpdate
+from src.schemas.contacts import ContactModel, ContactUpdate
 from sqlalchemy.sql import extract, select
 from fastapi import HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession as Session

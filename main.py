@@ -7,7 +7,7 @@ import pathlib
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.routes import  contacts #, notes, tags
+from src.routes import  contacts, notes, tags, auth
 from middlewares import CustomHeaderMiddleware
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -28,11 +28,11 @@ app.add_middleware(
 
 app.add_middleware(CustomHeaderMiddleware)
 
+app.include_router(auth.router, prefix='/api/auth')
 app.include_router(contacts.router, prefix='/api')
-# app.include_router(contacts.router, prefix='/api/login')
 # app.include_router(contacts.router, prefix='/api/signin')
-# app.include_router(tags.router, prefix='/api')
-# app.include_router(notes.router, prefix='/api')
+app.include_router(tags.router, prefix='/api')
+app.include_router(notes.router, prefix='/api')
 
 
 @app.get("/")
