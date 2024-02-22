@@ -13,7 +13,7 @@ class UserResponse(UserModel):
     id: int
     username: str
     mail: str  
-    avatar: str 
+    avatar: str | None
     created_at: datetime
 
     class Config:
@@ -30,7 +30,7 @@ class UsertUpdate(UserModel):
 
     
 class TokenModel(BaseModel):
-    acses_token: str 
+    access_token: str 
     refresh_token: str 
     token_type: str = "bearer"
 
