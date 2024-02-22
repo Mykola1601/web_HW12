@@ -5,6 +5,9 @@ from sqlalchemy.orm import Session
 from src.database.models import Note, Tag
 from src.schemas.notes import NoteModel, NoteUpdate, NoteStatusUpdate
 
+#  query = select(Contact).filter(Contact.first_name.ilike(contacts_find_data))
+#     contacts = await db.execute(query)
+#     result = contacts.scalars().all()
 
 async def get_notes(skip: int, limit: int, db: Session) -> List[Note]:
     return db.query(Note).offset(skip).limit(limit).all()

@@ -28,7 +28,7 @@ app.add_middleware(
 
 app.add_middleware(CustomHeaderMiddleware)
 
-app.include_router(auth.router, prefix='/api/auth')
+app.include_router(auth.router, prefix='/api')
 app.include_router(contacts.router, prefix='/api')
 # app.include_router(contacts.router, prefix='/api/signin')
 app.include_router(tags.router, prefix='/api')
