@@ -13,7 +13,7 @@ router = APIRouter(prefix='/notes', tags=["notes"])
 
 
 @router.get("/", response_model=List[NoteResponse])
-async def read_notes(skip: int = 0, limit: int = 100, db: Session = Depends(get_db), current_user:User=Depends(auth_service.get_current_user) ):
+async def read_notes(skip: int = 0, limit: int = 100, db: Session = Depends(get_db) ): #, current_user:User=Depends(auth_service.get_current_user)
     notes = await repository_notes.get_notes(skip, limit, db)
     return notes
 
@@ -26,8 +26,8 @@ async def read_note(note_id: int, db: Session = Depends(get_db), current_user:Us
     return note
 
 
-@router.post("/", response_model=NoteResponse)
-async def create_note(body: NoteModel, db: Session = Depends(get_db), current_user:User=Depends(auth_service.get_current_user)):
+@router.post("/", response_model=NoteResponse|None)
+async def create_note(body: NoteModel, db: Session = Depends(get_db) ):
     return await repository_notes.create_note(body, db)
 
 
@@ -53,3 +53,7 @@ async def remove_note(note_id: int, db: Session = Depends(get_db), current_user:
     if note is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Note not found")
     return note
+
+
+
+

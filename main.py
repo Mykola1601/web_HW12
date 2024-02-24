@@ -1,7 +1,9 @@
+from sqlalchemy.sql import  select
 import uvicorn
 from fastapi import FastAPI, File, UploadFile, status
 from fastapi import  HTTPException, Depends
 from sqlalchemy import text
+from src.database.models import Note
 from src.database.db import get_db
 import pathlib
 from fastapi.staticfiles import StaticFiles
@@ -29,14 +31,13 @@ app.add_middleware(
 
 app.include_router(auth.router, prefix='/api')
 app.include_router(contacts.router, prefix='/api')
-app.include_router(tags.router, prefix='/api')
-app.include_router(notes.router, prefix='/api')
+# app.include_router(tags.router, prefix='/api')
+# app.include_router(notes.router, prefix='/api')
 
 
 @app.get("/")
 def read_root():
     return {"message": "Hello World"}
-
 
 @app.get("/api/healthchecker")
 async def healthchecker(db: AsyncSession = Depends(get_db)):

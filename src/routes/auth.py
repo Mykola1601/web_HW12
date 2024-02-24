@@ -26,7 +26,7 @@ async def signup(body: UserModel, db: Session = Depends(get_db)):
 async def login(body: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     user = await repository_users.get_user_by_mail(body.username, db)
     if user is None:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid email or password")
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid email or pass")
     if not auth_service.verify_password(body.password, user.password):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid email or password")
     # Generate JWT
@@ -49,6 +49,7 @@ async def refresh_token(credentials: HTTPAuthorizationCredentials = Depends(get_
     refresh_token = await auth_service.create_refresh_token(data={"sub": mail})
     await repository_users.update_token(user, refresh_token, db)
     return {"access_token": access_token, "refresh_token": refresh_token, "token_type": "bearer"}
+
 
 @router.get("/")
 async def root():
