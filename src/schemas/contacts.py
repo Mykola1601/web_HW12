@@ -23,8 +23,8 @@ class ContactResponse(ContactModel):
     addition: str 
     created_at: datetime | None
     updated_at: datetime | None
-    user: UserResponse|None
-    user_id: int
+    user: UserResponse | None
+    # user_id: int
 
     class Config:
         orm_mode = True

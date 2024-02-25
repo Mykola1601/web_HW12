@@ -2,6 +2,8 @@ from datetime import datetime
 from typing import List, Optional
 from pydantic import BaseModel, Field, EmailStr, PastDate
 
+from src.database.models import Role
+
 
 class UserModel(BaseModel):
     username: str = Field(max_length=50, min_length=3)
@@ -15,6 +17,7 @@ class UserResponse(UserModel):
     mail: str  
     avatar: str | None
     created_at: datetime
+    role: Role | None
 
     class Config:
         from_attributes = True

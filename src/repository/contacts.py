@@ -54,6 +54,12 @@ async def get_contacts(skip: int, limit: int, db: Session, user:User) -> List[Co
     return contacts.scalars().all()
         
 
+async def get_all_contacts(skip: int, limit: int, db: Session) -> List[Contact]:
+    query = select(Contact).offset(skip).limit(limit)
+    contacts = await db.execute(query)
+    return contacts.scalars().all()
+        
+
 async def get_contact(contact_id: int, db: Session, user:User) -> Contact | None:
     query = select(Contact).filter_by(user=user).filter_by(id=contact_id)
     contact = await db.execute(query)

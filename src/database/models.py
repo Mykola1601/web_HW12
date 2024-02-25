@@ -30,6 +30,7 @@ class Contact(Base):
     user_id =  Column(Integer, ForeignKey("users.id"),nullable=True)
     user = relationship("User" , backref="contacts", lazy="joined")
 
+
 note_m2m_tag = Table(
     "note_m2m_tag",
     Base.metadata,
@@ -49,7 +50,7 @@ class User(Base):
     refresh_token = Column(String(255), nullable=True)
     created_at = Column('created_at', DateTime, default=func.now(), nullable=True)
     updated_at = Column('updated_at', DateTime, default=func.now(), onupdate=func.now())
-    role = Column("role", Enum(Role), default=Role.user )
+    role = Column("role", Enum(Role), default=Role.user) #, nullable=True
 
 
 class Note(Base):
